@@ -22,6 +22,13 @@ public class UserServiceTest {
     UserServiceImpl userService;
 
     @Test
+    void calculate_salary_until_2000_tax_should_be_two_percent() {
+        Mockito.when(userRepository.get(Mockito.anyLong())).thenReturn(buildUser(1990d));
+        double calculated = userService.calculate(1L);
+        Assertions.assertEquals(1950.20, calculated);
+    }
+
+    @Test
     void calculate_salary_greather_than_2000_tax_should_be_three_percent() {
         Mockito.when(userRepository.get(Mockito.anyLong())).thenReturn(buildUser(2500d));
         double calculated = userService.calculate(1L);
