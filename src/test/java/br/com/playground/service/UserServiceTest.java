@@ -23,27 +23,29 @@ public class UserServiceTest {
 
     @Test
     void calculate_salary_until_2000_tax_should_be_two_percent() {
-        Mockito.when(userRepository.get(Mockito.anyLong())).thenReturn(buildUser(1990d));
-        double calculated = userService.calculate(1L);
+        Mockito.when(userRepository.findBy(Mockito.any())).thenReturn(buildUser(1990d));
+        double calculated = userService.calculate(UUID.randomUUID());
         Assertions.assertEquals(1950.20, calculated);
     }
 
     @Test
     void calculate_salary_greather_than_2000_tax_should_be_three_percent() {
-        Mockito.when(userRepository.get(Mockito.anyLong())).thenReturn(buildUser(2500d));
-        double calculated = userService.calculate(1L);
+        Mockito.when(userRepository.findBy(Mockito.any())).thenReturn(buildUser(2500d));
+        double calculated = userService.calculate(UUID.randomUUID());
         Assertions.assertEquals(2425d, calculated);
     }
 
     @Test
     void calculate_salary_greather_than_4000_tax_should_be_four_percent() {
-        Mockito.when(userRepository.get(Mockito.anyLong())).thenReturn(buildUser(4001d));
-        double calculated = userService.calculate(1L);
+        Mockito.when(userRepository.findBy(Mockito.any())).thenReturn(buildUser(4001d));
+        double calculated = userService.calculate(UUID.randomUUID());
         Assertions.assertEquals(3840.96, calculated);
     }
 
     private User buildUser(Double salary) {
-        UUID uuid = UUID.randomUUID();
-        return new User(uuid, "John", salary);
+        var uuid = UUID.randomUUID();
+        var user = new User("John", salary);
+        user.setUuid(uuid);
+        return user;
     }
 }

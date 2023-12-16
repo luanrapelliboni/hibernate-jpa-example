@@ -3,17 +3,19 @@ package br.com.playground.service;
 import br.com.playground.model.User;
 import br.com.playground.repository.UserRepository;
 
+import java.util.UUID;
+
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
+    
     @Override
-    public double calculate(Long id) {
-        User user = userRepository.get(id);
-        double salary = user.salary();
+    public double calculate(UUID uuid) {
+        User user = userRepository.findBy(uuid);
+        double salary = user.getSalary();
         Double tax = 0D;
         if (salary >= 0 && salary <= 2000)
             tax = 2d;

@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: example
+    volumes:
+      - ./volumes/mariadb-backup:/var/lib/mysql
+    ports:
+      - 3306:3306
+

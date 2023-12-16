@@ -14,4 +14,4 @@ target/
 stale_outputs_checked
 
 #Docker
-.docker/postgres/data
+volumes/mariadb-backup

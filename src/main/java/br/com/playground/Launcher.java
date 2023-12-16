@@ -1,17 +1,26 @@
 package br.com.playground;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
-import br.com.playground.model.*;
+import br.com.playground.model.User;
+import br.com.playground.repository.UserRepositoryImpl;
+import br.com.playground.service.UserServiceImpl;
 
 public class Launcher {
     public static void main(String[] args) {
-        List<String> names = Arrays.asList("one", "two", "three");
-        names.forEach(System.out::println);
-        var user = new User(UUID.randomUUID(), "John", 1000d);
+        var userRepository = new UserRepositoryImpl();
 
-        System.out.println(user.name());
+        var johnUser = userRepository.create(User.builder()
+                        .name("John")
+                        .salary(1000d)
+                .build());
+
+        var userService = new UserServiceImpl(userRepository);
+        var salary = userService.calculate(johnUser.getUuid());
+
+        var formattedText = johnUser.getName()
+                                .concat(" salary is: ")
+                                .concat(String.valueOf(salary));
+
+        System.out.println(formattedText);
+
     }
 }
