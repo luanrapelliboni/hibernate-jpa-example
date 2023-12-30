@@ -16,7 +16,7 @@ public class UserServiceImpl implements UserService {
     public double calculate(UUID uuid) {
         User user = userRepository.findBy(uuid);
         double salary = user.getSalary();
-        Double tax = 0D;
+        var tax = 0D;
         if (salary >= 0 && salary <= 2000)
             tax = 2d;
         else if (salary > 2000 && salary <= 4000)
