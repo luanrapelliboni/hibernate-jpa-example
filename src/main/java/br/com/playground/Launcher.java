@@ -14,7 +14,7 @@ public class Launcher {
     public static void main(String[] args) {
         var userRepository = new UserRepositoryImpl();
 
-//        var users = createFakeUsers(100);
+        //var users = createFakeUsers(100);
         var users = userRepository.findAll();
 
         for (var user : users) {
@@ -30,7 +30,7 @@ public class Launcher {
 
             System.out.println(formattedText);
         }
-        //System.out.println("done.");
+//        System.out.println("done.");
     }
 
     public static List<User> createFakeUsers(Integer quantityOfUsers) {
@@ -41,7 +41,7 @@ public class Launcher {
 
         for (var i = 0; i < quantityOfUsers; ) {
             var name = faker.name().fullName();
-            var salary = faker.number().randomDouble(4, 0, 1000);
+            var salary = faker.number().randomDouble(2, 1000, 5000);
             var user = userRepository.create(User.builder()
                     .name(name)
                     .salary(salary)
