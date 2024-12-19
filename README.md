@@ -1,2 +1,3 @@
-# junit5-mockito-playground
-JUnit5 + Mockito Playground
+# hibernate-jpa-example
+
+Hibernate with JPA example
